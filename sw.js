@@ -1,7 +1,11 @@
 self.addEventListener('install', (e) => {
-  console.log('[Service Worker] Instalado');
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (e) => {
+  return self.clients.claim();
 });
 
 self.addEventListener('fetch', (e) => {
-  // PWA offline support básico
+  e.respondWith(fetch(e.request));
 });

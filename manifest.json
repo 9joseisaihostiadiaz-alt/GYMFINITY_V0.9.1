@@ -1,21 +1,25 @@
+
 {
-  "name": "Gym Finity",
-  "short_name": "Gym Finity",
-  "description": "Entrena sin límites",
+  "id": "./index.html",
+  "name": "Gym Finity Pro",
+  "short_name": "GymFinity",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#020202",
+  "theme_color": "#00e5ff",
   "icons": [
     {
-      "src": "img/LOG.png",
+      "src": "./LOG.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "img/LOG.png",
+      "src": "./LOG.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
