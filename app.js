@@ -1660,7 +1660,7 @@ function renderLandingPage() {
               <div class="flex"><span class="letter-anim delay-1">G</span><span class="letter-anim delay-2">Y</span><span class="letter-anim delay-3">M</span><span class="letter-anim delay-4 ml-2">F</span><span class="letter-anim delay-5">I</span><span class="letter-anim delay-6">N</span><span class="letter-anim delay-7">I</span><span class="letter-anim delay-8">T</span><span class="letter-anim delay-9">Y</span><span class="text-cyan-400 drop-shadow-[0_0_10px_rgba(0,229,255,0.8)]">,</span></div>
               <span class="glow-text-anim text-white">entrena sin limites.</span>
           </h2>
-          <p class="text-zinc-400 max-w-2xl mx-auto text-sm md:text-base mt-2 drop-shadow-md">Inteligencia artificial aplicada al rendimiento biomecánico. Evaluaciones InBody y rutinas adaptativas.</p>
+          <p class="text-zinc-400 max-w-2xl mx-auto text-sm md:text-base mt-2 drop-shadow-md">Entrenamiento Inteligente aplicado al rendimiento deportivo.Evaluaciones InBody y rutinas adaptativas.</p>
       </div>
       
       <div class="space-y-12">
