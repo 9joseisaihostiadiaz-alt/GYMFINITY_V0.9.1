@@ -1462,10 +1462,14 @@ function renderClientPortal() {
               <div>
                   <div class="flex items-center gap-3">
                       <h2 class="text-2xl md:text-3xl font-black text-white drop-shadow-md uppercase tracking-wider">${name}</h2>
-                      <!-- BOTÓN LÁPIZ PARA EDITAR -->
+                      
+                      ${state.viewingClientAsAdmin ? `
+                      <!-- BOTÓN LÁPIZ PARA EDITAR (SÓLO VISIBLE PARA ENTRENADOR) -->
                       <button onclick="openEditProfileModal()" class="w-8 h-8 md:w-9 md:h-9 bg-zinc-900 border border-zinc-700 rounded-full flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-700 hover:border-cyan-500 transition-all shadow-md z-20" title="Editar Perfil">
                           <i class="fa-solid fa-pen text-[10px] md:text-xs"></i>
                       </button>
+                      ` : ''}
+                      
                   </div>
                   <p class="text-[10px] md:text-xs mt-1 font-bold uppercase tracking-widest text-zinc-500">
                       CC: ${clientData.cc} <span class="mx-1 text-zinc-700">|</span> Registro: ${date}
@@ -1660,7 +1664,7 @@ function renderLandingPage() {
               <div class="flex"><span class="letter-anim delay-1">G</span><span class="letter-anim delay-2">Y</span><span class="letter-anim delay-3">M</span><span class="letter-anim delay-4 ml-2">F</span><span class="letter-anim delay-5">I</span><span class="letter-anim delay-6">N</span><span class="letter-anim delay-7">I</span><span class="letter-anim delay-8">T</span><span class="letter-anim delay-9">Y</span><span class="text-cyan-400 drop-shadow-[0_0_10px_rgba(0,229,255,0.8)]">,</span></div>
               <span class="glow-text-anim text-white">entrena sin limites.</span>
           </h2>
-          <p class="text-zinc-400 max-w-2xl mx-auto text-sm md:text-base mt-2 drop-shadow-md">Entrenamiento Inteligente aplicado al rendimiento deportivo.Evaluaciones InBody y rutinas adaptativas.</p>
+          <p class="text-zinc-400 max-w-2xl mx-auto text-sm md:text-base mt-2 drop-shadow-md">Inteligencia artificial aplicada al rendimiento biomecánico. Evaluaciones InBody y rutinas adaptativas.</p>
       </div>
       
       <div class="space-y-12">
@@ -2083,6 +2087,9 @@ window.filterClientsTable = function(query) {
     });
 };
 
+// ==========================================
+// RENDERIZADO DE CLIENTES ACTIVOS
+// ==========================================
 function renderActiveClientsTab(clients) { 
   // Botones de acción y barra de búsqueda
   const headerActions = `
@@ -2093,19 +2100,20 @@ function renderActiveClientsTab(clients) {
         </h3>
         
         <!-- BUSCADOR -->
-        <div class="relative w-full md:max-w-xs flex-1">
+        <div class="relative w-full md:max-w-xs flex-1 shrink-0">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <i class="fa-solid fa-magnifying-glass text-zinc-500"></i>
             </div>
             <input type="text" onkeyup="filterClientsTable(this.value)" placeholder="Buscar por nombre o CC..." class="w-full bg-[#050505] border border-zinc-800 text-white text-sm rounded-xl focus:border-cyan-500 block pl-10 p-2.5 outline-none transition-colors shadow-inner placeholder-zinc-600">
         </div>
 
-        <div class="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
-            <button onclick="showBulkImportModal()" class="flex-1 md:flex-none bg-yellow-400 text-black px-4 md:px-5 py-2.5 rounded-xl text-xs font-black shadow-[0_0_10px_rgba(255,215,0,0.3)] hover:scale-105 transition flex items-center justify-center gap-2 whitespace-nowrap">
-                <i class="fa-solid fa-file-import"></i> <span class="hidden lg:inline">Importar Excel</span>
+        <!-- BOTONES FIX: Quitamos overflow-x-auto y usamos flex-wrap -->
+        <div class="flex flex-wrap gap-3 w-full md:w-auto justify-start md:justify-end shrink-0">
+            <button onclick="showBulkImportModal()" class="flex-1 md:flex-none bg-yellow-400 text-black px-5 py-2.5 rounded-xl text-xs font-black shadow-[0_0_10px_rgba(255,215,0,0.3)] hover:scale-105 transition flex items-center justify-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-file-import"></i> Importar Excel
             </button>
-            <button onclick="showClientRegisterModal()" class="flex-1 md:flex-none bg-cyan-500 text-black px-4 md:px-5 py-2.5 rounded-xl text-xs font-black shadow-[0_0_10px_rgba(0,229,255,0.3)] hover:scale-105 transition flex items-center justify-center gap-2 whitespace-nowrap">
-                <i class="fa-solid fa-user-plus"></i> <span class="hidden lg:inline">Nuevo Usuario</span>
+            <button onclick="showClientRegisterModal()" class="flex-1 md:flex-none bg-cyan-500 text-black px-5 py-2.5 rounded-xl text-xs font-black shadow-[0_0_10px_rgba(0,229,255,0.3)] hover:scale-105 transition flex items-center justify-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-user-plus"></i> Nuevo Usuario
             </button>
         </div>
     </div>
@@ -2143,7 +2151,7 @@ function renderActiveClientsTab(clients) {
         </div>
 
         <!-- VISTA ESCRITORIO -->
-        <div class="hidden md:block card-depth rounded-[2rem] p-8 overflow-x-auto border border-cyan-500/20">
+        <div class="hidden md:block card-depth rounded-[2rem] p-8 overflow-x-auto border border-cyan-500/20 custom-scrollbar">
             <table id="desktop-clients-table" class="w-full text-left text-sm text-zinc-300">
                 <thead class="text-zinc-500 uppercase text-xs tracking-wider border-b border-zinc-800">
                     <tr><th class="p-4 font-bold">Cliente</th><th class="p-4 font-bold">Vencimiento</th><th class="p-4 font-bold">Datos BIA</th><th class="p-4 font-bold text-center">Acciones</th></tr>
